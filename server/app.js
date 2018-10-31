@@ -1,12 +1,57 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello world!'
+// parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
+app.use(cors());
+
+mongoose.set('debug', true);
+// promisses not callbacks
+mongoose.Promise = Promise;
+mongoose.connect(
+  'mongodb://localhost/code_unimontes',
+  {
+    keepAlive: true
+  }
+);
+
+// Code schema
+const Schema = mongoose.Schema;
+
+const CodeSchema = new Schema({
+  title: String,
+  code: String,
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// turning the schema to a model
+const Code = mongoose.model('Code', CodeSchema);
+
+app.get('/api/all', (req, res) => {
+  Code.find().then(codes => {
+    res.status(201).json(codes);
   });
 });
 
-app.post('/', (req, res) => {});
+app.post('/api', (req, res) => {
+  // const data = req.body.code;
+  Code.create(req.body)
+    .then(newCode => {
+      // 201 is the status for created
+      res.status(201).json(newCode);
+    })
+    .then(err => {
+      res.send(err);
+    });
+});
 
 app.listen(3000, () => console.log('server is running on port 3000'));
