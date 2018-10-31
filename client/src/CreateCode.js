@@ -22,7 +22,7 @@ class CreateCode extends Component {
 
     const submitData = async code => {
       try {
-        const url = 'http://127.0.0.1:3000/api/';
+        const url = 'https://grim-dracula-74484.herokuapp.com/api/';
         const data = await fetch(url, {
           method: 'POST', // or 'PUT'
           body: JSON.stringify(code), // data can be `string` or {object}!

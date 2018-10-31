@@ -16,7 +16,7 @@ class GetCodes extends Component {
   componentDidMount() {
     const submitData = async code => {
       try {
-        const url = 'http://127.0.0.1:3000/api/all';
+        const url = 'https://grim-dracula-74484.herokuapp.com/api/all';
         const data = await fetch(url, {
           method: 'GET', // or 'PUT'
           headers: {

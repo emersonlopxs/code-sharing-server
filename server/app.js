@@ -15,7 +15,7 @@ mongoose.set('debug', true);
 // promisses not callbacks
 mongoose.Promise = Promise;
 mongoose.connect(
-  'mongodb://localhost/code_unimontes',
+  'mongodb://emerson_code:semlimites1122@ds147003.mlab.com:47003/code',
   {
     keepAlive: true
   }
