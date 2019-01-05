@@ -54,4 +54,6 @@ app.post('/api', (req, res) => {
     });
 });
 
+// process.env.PORT is the port to run on the heroku servers
 app.listen(process.env.PORT || 3000, () => console.log('server is running on port 3000'));
+
